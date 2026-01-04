@@ -1,11 +1,14 @@
 import { Leaf } from "lucide-react";
 
-const Logo = ({ size = "default" }: { size?: "sm" | "default" | "lg" }) => {
-  const sizeClasses = {
-    sm: "h-6 w-6",
-    default: "h-8 w-8",
-    lg: "h-12 w-12",
-  };
+const Logo = ({ className }: { className?: string }) => {
+  return (
+    <div className={className}>
+      {/* Remplace cet SVG par ton propre fichier image si tu l'as en .png ou .svg */}
+      <img src="/logo-agrotech.svg" alt="AgroTech Logo" className="w-full h-full object-contain" />
+    </div>
+  );
+};
+export default Logo;
 
   const textSizeClasses = {
     sm: "text-lg",
