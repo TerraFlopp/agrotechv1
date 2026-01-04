@@ -1,12 +1,19 @@
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import Logo from "../components/Logo";
 
 const Index = () => {
+  // Cette partie change le nom de l'onglet dès que la page s'affiche
+  useEffect(() => {
+    document.title = "AgroTech — Cultivons l'avenir ensemble";
+  }, []);
+
   return (
     <div className="min-h-screen bg-[#F5F0E8] flex flex-col items-center p-6 font-sans">
       <header className="py-10 flex flex-col items-center space-y-3">
-        <Logo className="w-24 h-24" />
-        <h1 className="text-3xl font-bold text-[#2D5016]">AgroTech</h1>
+        {/* J'ai augmenté la taille du logo ici aussi (w-32 h-32) */}
+        <Logo className="w-32 h-32" />
+        <h1 className="text-4xl font-bold text-[#2D5016]">AgroTech</h1>
       </header>
 
       <main className="w-full max-w-5xl">
@@ -32,7 +39,7 @@ const Index = () => {
             </div>
             <div className="flex-1 w-full h-64 md:h-96 rounded-[30px] overflow-hidden shadow-xl border-4 border-white/50">
               <img 
-                src="https://images.unsplash.com/photo-1585059895311-85942478964d?auto=format&fit=crop&q=80" 
+                src="/serre.jpg" 
                 className="w-full h-full object-cover" 
                 alt="Serre" 
               />
