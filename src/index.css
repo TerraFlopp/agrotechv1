@@ -1,0 +1,85 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* AgroTech Design System - Green/Beige palette */
+
+@layer base {
+  :root {
+    --background: 36 33% 94%;
+    --foreground: 90 35% 15%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 90 35% 15%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 90 35% 15%;
+
+    --primary: 90 51% 21%;
+    --primary-foreground: 36 33% 97%;
+
+    --secondary: 36 25% 88%;
+    --secondary-foreground: 90 35% 15%;
+
+    --muted: 36 20% 90%;
+    --muted-foreground: 90 15% 40%;
+
+    --accent: 90 40% 35%;
+    --accent-foreground: 36 33% 97%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --warning: 35 92% 50%;
+    --warning-foreground: 35 92% 15%;
+
+    --success: 142 71% 45%;
+    --success-foreground: 0 0% 100%;
+
+    --border: 36 20% 85%;
+    --input: 36 20% 85%;
+    --ring: 90 51% 21%;
+
+    --radius: 0.75rem;
+
+    --sidebar-background: 36 33% 96%;
+    --sidebar-foreground: 90 35% 15%;
+    --sidebar-primary: 90 51% 21%;
+    --sidebar-primary-foreground: 36 33% 97%;
+    --sidebar-accent: 36 25% 88%;
+    --sidebar-accent-foreground: 90 35% 15%;
+    --sidebar-border: 36 20% 85%;
+    --sidebar-ring: 90 51% 21%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+  }
+}
+
+@layer utilities {
+  .font-display {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-weight: 600;
+  }
+}
+
+/* Animation for harvest gauge fill */
+@keyframes fill-gauge {
+  from {
+    width: 0%;
+  }
+  to {
+    width: var(--gauge-value);
+  }
+}
+
+.animate-fill-gauge {
+  animation: fill-gauge 1.2s ease-out forwards;
+}
