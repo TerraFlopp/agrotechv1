@@ -1,49 +1,80 @@
-import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import Logo from "../components/Logo";
+import { useNavigate } from "react-router-dom";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import Logo from "@/components/Logo";
+import { toast } from "@/hooks/use-toast";
 
-export default function Login() {
+const Login = () => {
   const navigate = useNavigate();
-  const [identifiant, setIdentifiant] = useState("");
+  const [identifier, setIdentifier] = useState("");
+  const [password, setPassword] = useState("");
 
-  const handleLogin = (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // On transmet le nom saisi à la page dashboard via l'état de navigation
-    navigate('/dashboard', { state: { name: identifiant } });
+    
+    if (!identifier || !password) {
+      toast({
+        title: "Champs requis",
+        description: "Veuillez remplir tous les champs.",
+        variant: "destructive",
+      });
+      return;
+    }
+
+    // Sauvegarde du nom pour le Dashboard avant la redirection
+    localStorage.setItem("user_name", identifier);
+
+    // Simulated login
+    navigate("/dashboard");
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F0E8] flex flex-col items-center justify-center p-6">
-      <div className="w-full max-w-md space-y-8 text-center">
-        <div className="flex flex-col items-center space-y-4">
-          <Logo className="w-16 h-16" />
-          <p className="text-[#2D5016] font-medium italic">"Ensemble, faisons pousser le futur 🌱"</p>
+    <div className="flex min-h-screen flex-col items-center justify-center px-6">
+      <div className="w-full max-w-sm space-y-8">
+        <div className="flex flex-col items-center gap-4">
+          <Logo size="lg" />
+          <p className="text-center text-muted-foreground">
+            Ensemble, faisons pousser le futur 🌱
+          </p>
         </div>
 
-        <form onSubmit={handleLogin} className="space-y-4">
-          <input 
-            type="text" 
-            placeholder="Identifiant Membre" 
-            value={identifiant}
-            onChange={(e) => setIdentifiant(e.target.value)}
-            className="w-full p-4 rounded-2xl bg-white border-none shadow-sm focus:ring-2 focus:ring-[#86C494] outline-none transition" 
-            required
-          />
-          <input 
-            type="password" 
-            placeholder="Mot de passe" 
-            className="w-full p-4 rounded-2xl bg-white border-none shadow-sm focus:ring-2 focus:ring-[#86C494] outline-none transition" 
-          />
-          <button type="submit" className="w-full bg-[#2D5016] text-white p-4 rounded-2xl font-bold hover:bg-[#1f380f] transition shadow-lg">
+        <form onSubmit={handleSubmit} className="space-y-5">
+          <div className="space-y-2">
+            <Label htmlFor="identifier">Identifiant Membre</Label>
+            <Input
+              id="identifier"
+              type="text"
+              placeholder="Votre identifiant"
+              value={identifier}
+              onChange={(e) => setIdentifier(e.target.value)}
+              className="bg-card"
+            />
+          </div>
+
+          <div className="space-y-2">
+            <Label htmlFor="password">Mot de passe</Label>
+            <Input
+              id="password"
+              type="password"
+              placeholder="Votre mot de passe"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="bg-card"
+            />
+            <p className="text-xs text-muted-foreground">
+              Entrez n'importe quel mot de passe
+            </p>
+          </div>
+
+          <Button type="submit" className="w-full">
             Se connecter
-          </button>
+          </Button>
         </form>
-        
-        {/* Mention demandée sous le formulaire */}
-        <p className="text-xs text-gray-400 mt-4">
-          Entrez n'importe quel mot de passe
-        </p>
       </div>
     </div>
   );
-}
+};
+
+export default Login;
