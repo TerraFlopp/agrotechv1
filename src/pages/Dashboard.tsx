@@ -1,13 +1,18 @@
 import Logo from "../components/Logo";
 import { Thermometer, Droplets, FlaskConical, Bell, Calendar, QrCode } from "lucide-react";
+import { useLocation } from "react-router-dom";
 
 export default function Dashboard() {
+  const location = useLocation();
+  // On récupère le nom depuis l'état, sinon on met "Thomas" par défaut
+  const userName = location.state?.name || "Thomas";
+
   return (
     <div className="min-h-screen bg-[#F5F0E8] pb-10">
       {/* Header */}
       <nav className="p-6 flex justify-between items-center max-w-4xl mx-auto">
         <div>
-          <h2 className="text-xl font-bold text-[#2D5016]">Bienvenue, Thomas</h2>
+          <h2 className="text-xl font-bold text-[#2D5016]">Bienvenue, {userName}</h2>
           <span className="text-[10px] bg-[#2D5016] text-white px-2 py-0.5 rounded-full uppercase font-bold tracking-wider">Membre Premium</span>
         </div>
         <Logo className="w-10 h-10 opacity-80" />
